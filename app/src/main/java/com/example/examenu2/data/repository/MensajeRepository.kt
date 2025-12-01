@@ -4,11 +4,13 @@ import com.example.examenu2.data.Api.RetrofitClient
 import com.example.examenu2.data.model.Mensaje
 import com.example.examenu2.data.api.ApiService
 import retrofit2.Response
+import com.example.examenu2.data.model.LoginResponse // NECESARIO
+
 
 class MensajeRepository(private val apiService: ApiService) {
 
     // Función que llama a la API para obtener todos los mensajes
-    suspend fun obtenerTodosLosMensajes(): List<Mensaje> {
+    suspend fun obtenerMensajes(): List<Mensaje> {
         return apiService.obtenerMensajes()
     }
 
@@ -16,8 +18,13 @@ class MensajeRepository(private val apiService: ApiService) {
     suspend fun crearNuevoMensaje(usuarioId: Int, contenido: String): Response<Mensaje> {
         return apiService.crearMensaje(usuarioId, contenido)
     }
+    suspend fun login(email: String, password: String): Response<LoginResponse> {
+        return apiService.login(email, password)
+    }
 
-    // ... (Puedes agregar aquí buscarUsuario, login, etc.)
+
+
+
 }
 
 // Factoría para inyectar el repositorio en el ViewModel (como en el ejemplo de GitHub)
